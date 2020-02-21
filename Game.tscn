@@ -1,26 +1,23 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://Stars background.jpg" type="Texture" id=2]
 [ext_resource path="res://kenney_spaceshooterextension/PNG/Sprites/Ships/spaceShips_005.png" type="Texture" id=3]
-[ext_resource path="res://alien-ufo-pack/PNG/shipYellow_manned.png" type="Texture" id=4]
-[ext_resource path="res://alien-ufo-pack/PNG/shipGreen_manned.png" type="Texture" id=5]
-[ext_resource path="res://kenney_spaceshooterextension/PNG/Sprites/Meteors/spaceMeteors_001.png" type="Texture" id=6]
-[ext_resource path="res://alien-ufo-pack/PNG/shipPink_manned.png" type="Texture" id=7]
-[ext_resource path="res://kenney_spaceshooterextension/PNG/Sprites/Meteors/spaceMeteors_004.png" type="Texture" id=8]
-[ext_resource path="res://kenney_spaceshooterextension/PNG/Sprites/Meteors/spaceMeteors_003.png" type="Texture" id=9]
+[ext_resource path="res://Scripts.Enemies.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/Meteors.gd" type="Script" id=8]
+[ext_resource path="res://Scenes/Meteors.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scripts.Player.gd" type="Script" id=10]
 [ext_resource path="res://Scenes/Explosions.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scripts.HUD.gd" type="Script" id=12]
+[ext_resource path="res://Scripts.Bullets.gd" type="Script" id=14]
 
 [node name="Game" type="Node2D"]
-position = Vector2( 44.9228, -16.5447 )
-scale = Vector2( 25.76, 1 )
 script = ExtResource( 1 )
 
 [node name="Background" type="Node2D" parent="."]
 
 [node name="Sprite" type="Sprite" parent="Background"]
+scale = Vector2( 30, 1 )
 
 [node name="Stars background" type="Sprite" parent="Background/Sprite"]
 position = Vector2( 17.3211, 277.511 )
@@ -28,94 +25,45 @@ scale = Vector2( 0.0544818, -1.16363 )
 texture = ExtResource( 2 )
 
 [node name="Bullets" type="Node2D" parent="."]
-visible = false
-position = Vector2( 17.439, 324.086 )
+position = Vector2( 500.115, 578.276 )
+scale = Vector2( 0.964502, 1 )
+script = ExtResource( 14 )
+
+[node name="Timer" type="Timer" parent="Bullets"]
 
 [node name="Enemy Bullets" type="Node2D" parent="."]
+scale = Vector2( 5.23252, 0.56376 )
 
 [node name="Player" type="KinematicBody2D" parent="."]
-position = Vector2( 19.5469, 556.415 )
-scale = Vector2( 1.21646, 0.758138 )
+position = Vector2( 17.4293, 554.811 )
 script = ExtResource( 10 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="Sprite" type="Sprite" parent="Player"]
-scale = Vector2( 0.025, -0.953 )
+position = Vector2( 489.817, 15.7084 )
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player"]
 scale = Vector2( 0.025088, -0.953449 )
 polygon = PoolVector2Array( 48, -40.1, 51, -38.1, 51, -32, 68, -7.6, 68, 18.4, 66.2, 22, 59.8, 22, 49, 19.5, 37.2, 42, 20, 42, 20, 34.3, 9.7, 42, -11, 42, -11, 40.1, -20, 34.5, -20, 42, -37, 42, -37, 40.5, -48.2, 19, -53.5, 19, -59.5, 22, -65.8, 22, -68, 19.8, -68, -4.1, -62.4, -19, -60.9, -19, -51, -30.7, -51, -39, -49, -39, -46.7, -42, -4, -42, -4, -41.1, -0.5, -39, 1, -39, 3.3, -42, 48, -42 )
 
-[node name="Meteors" type="Node2D" parent="."]
+[node name="Meteors" parent="." instance=ExtResource( 9 )]
+position = Vector2( 24.0511, -16.5352 )
+scale = Vector2( 35, 0.892 )
+script = ExtResource( 8 )
 
-[node name="Meteor" type="RigidBody2D" parent="Meteors"]
-position = Vector2( 1.03516, -337.766 )
-scale = Vector2( 0.0205688, 0.500287 )
-
-[node name="spaceMeteors_001" type="Sprite" parent="Meteors/Meteor"]
-position = Vector2( 116.317, 451.987 )
-scale = Vector2( 0.72, 0.68 )
-texture = ExtResource( 6 )
-
-[node name="spaceMeteors_004" type="Sprite" parent="Meteors/Meteor"]
-position = Vector2( 1398.68, 599.043 )
-scale = Vector2( 0.451108, 0.46965 )
-texture = ExtResource( 8 )
-
-[node name="spaceMeteors_003" type="Sprite" parent="Meteors/Meteor"]
-position = Vector2( 810.239, 481.322 )
-scale = Vector2( 0.965517, 1.08 )
-texture = ExtResource( 9 )
+[node name="Timer" type="Timer" parent="Meteors"]
+autostart = true
 
 [node name="Enemies" type="Node2D" parent="."]
+scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 4 )
 
-[node name="Enemy " type="KinematicBody2D" parent="Enemies"]
-position = Vector2( 3.17677, -221.737 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="BlueUFO" type="Sprite" parent="Enemies/Enemy "]
-position = Vector2( 6.50624, 80.7946 )
-scale = Vector2( 0.0221986, 0.477775 )
-texture = ExtResource( 5 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Enemies/Enemy "]
-position = Vector2( 6.50624, 80.7946 )
-scale = Vector2( 0.0221986, 0.477775 )
-polygon = PoolVector2Array( 30, -50.5, 30, -48.1, 36, -37, 36, -19.5, 34.3, -19.5, 28.3, -7.5, 29.5, -7.5, 45.5, 0.5, 48.8, 0.5, 60, -0.700001, 60, 1.5, 62, 3, 62, 34.5, 52, 39.8, 52, 42.3, 41.9, 53.5, 39.5, 53.5, 26.6, 61.5, -22.7, 61.5, -43, 52.8, -43, 51.2, -52.9, 39.5, -55.6, 39.5, -62, 34.9, -62, 2.7, -58.8, -0.5, -48.8, -0.5, -46.8, 0, -28.5, -6.7, -37, -19.9, -37, -39.5, -35.3, -39.5, -30.3, -51.5, -28.7, -51.5, -16, -61.5, 15, -61.5 )
-
-[node name="Enemy 2" type="KinematicBody2D" parent="Enemies"]
-position = Vector2( 21.9175, -35.9952 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="RedUFO" type="Sprite" parent="Enemies/Enemy 2"]
-scale = Vector2( 0.0339376, 0.621477 )
-texture = ExtResource( 7 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Enemies/Enemy 2"]
-scale = Vector2( 0.0339376, 0.621477 )
-polygon = PoolVector2Array( 30, -52.5, 30, -50.1, 36, -39, 36, -21.5, 34.3, -21.5, 28.3, -9.5, 29.5, -9.5, 45.5, -1.5, 48.8, -1.5, 60, -2.7, 60, -0.5, 62, 1, 62, 32.5, 54, 36.6, 54, 39.2, 42.9, 52.5, 26, 52.5, 26, 50.6, 19, 46.2, 19, 53.2, 11.5, 63.5, -11, 63.5, -19, 55.3, -19, 44.5, -30.3, 53.5, -42, 53.5, -42, 51.5, -52, 44.5, -52, 41.8, -53.4, 37.5, -55.6, 37.5, -62, 32.9, -62, 0.699997, -58.8, -2.5, -48.8, -2.5, -46.8, -2, -28.5, -8.7, -37, -21.9, -37, -41.5, -35.3, -41.5, -30.3, -53.5, -28.7, -53.5, -16, -63.5, 15, -63.5 )
-
-[node name="Enemy 3" type="KinematicBody2D" parent="Enemies"]
-position = Vector2( 34.54, -96.6579 )
-scale = Vector2( 1.15356, 0.927249 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="YellowUFO" type="Sprite" parent="Enemies/Enemy 3"]
-scale = Vector2( 0.0234227, 0.655225 )
-texture = ExtResource( 4 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Enemies/Enemy 3"]
-scale = Vector2( 0.0234227, 0.655225 )
-polygon = PoolVector2Array( 29, -43, 29, -40.6, 35, -29.5, 35, -13.6, 32.9, -8, 33.5, -8, 46.5, -1, 48.8, -1, 60, -2.2, 60, 0, 62, 1.5, 62, 32, 54, 37.1, 54, 40.7, 42.6, 54, 16.3, 54, 8.1, 45, -9.1, 45, -17.3, 54, -44.1, 54, -51, 47.9, -51, 45.3, -54.3, 38, -62, 32.5, -62, 2, -59, -2, -49.3, -2, -35, -6.5, -39, -18.7, -39, -25.3, -35.5, -38, -34, -38, -23, -52, -20.5, -52, -17.2, -54, 14, -54 )
+[node name="Timer" type="Timer" parent="Enemies"]
+autostart = true
 
 [node name="Explosions" parent="." instance=ExtResource( 11 )]
 
@@ -145,5 +93,8 @@ max_lines_visible = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="timeout" from="Bullets/Timer" to="Bullets" method="_on_Timer_timeout"]
 [connection signal="health_changed" from="Player" to="HUD" method="_on_Player_health_changed"]
 [connection signal="score_changed" from="Player" to="HUD" method="_on_Player_score_changed"]
+[connection signal="timeout" from="Meteors/Timer" to="Meteors" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Enemies/Timer" to="Enemies" method="_on_Timer_timeout"]

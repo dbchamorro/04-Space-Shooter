@@ -136,7 +136,6 @@ animations = [ {
 } ]
 
 [node name="Explosions" type="Node2D"]
-visible = false
 position = Vector2( 1.43388e-08, 0 )
 
 [node name="Explosion" type="AnimatedSprite" parent="."]

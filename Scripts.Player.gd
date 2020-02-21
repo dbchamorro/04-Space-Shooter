@@ -3,7 +3,7 @@ extends KinematicBody2D
 export var health = 100
 export var score = 0
 export var margin = 5
-export var x_range = 300
+export var x_range = 0
 export var y_range = 300
 export var acceleration = 0.1
 
@@ -33,13 +33,14 @@ func change_score(s):
 	
 func die():
 	queue_free()
+	get_tree().change_scene("res://Scenes/GameOver.tscn")
 
 func _physics_process(delta):
 	if Input.is_action_pressed("Fire"):
 		var b = Bullet.instance()
 		b.position = position
 		b.position.y -= 25
-		get_node("/root/Game/Bullets").add_child(b)
+		get_node("/root/Game/Bullets").fire(b)
 		
 	if Input.is_action_pressed("Left"):
 		velocity.x -= acceleration
